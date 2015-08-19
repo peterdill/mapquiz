@@ -1,0 +1,20 @@
+<ul class='highscores leaders' >
+{{#each data}}
+  <li>
+    <span>{{name}}</span>
+    <span>{{score}}</span>
+  </li>
+{{else}}
+  <i>Highscore list is empty</i>
+{{/each}}
+</ul>
+<!--<table class='highscores table table-bordered table-highscores' >
+{{#each data}}
+  <tr>
+    <td>{{name}}</td>
+    <td  class='expand' style='width: 99%; border-bottom: 1px dotted #000' />
+    <td>{{score}}</td>
+  </tr>
+{{/each}}
+</table>
+-->

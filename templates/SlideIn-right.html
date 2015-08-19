@@ -1,0 +1,17 @@
+<div id="navbar" class="navbar navbar-inverse navbar-fixed-right">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="slidein-title" href="#" activity="gui:slidein:hidem" label="{{{ title }}}">{{{ title }}} &raquo;</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          {{#each buttons}}
+            <li><a href="#" activity="{{ activity }}" label="{{{ label }}}">
+              {{{ label }}}
+            </a></li>
+          {{/each}}
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container -->
+  </div><!--/.navbar-inner -->
+</div><!--/.navbar -->
+

@@ -1,0 +1,131 @@
+<div class="popup-container">
+
+{{#if header}}
+  <div class="modal-header">
+{{#if title}}
+	  <a href="#" class="close" activity="app:cancel">×</a>
+	  <h4>{{{ title }}}</h4>
+{{/if}}
+  </div>
+{{/if}}
+
+{{#if hint}}
+    <div class="hint">
+      <div>
+        {{{ text }}}
+      </div>
+    </div>
+
+{{else}} <!-- not hint --> <!-- standard popup -->
+    <div class="modal-body">
+      <div>
+        {{{ text }}}
+      </div>
+
+  {{#if input}}
+      <br />
+	    <div class="modal-input">
+		    <input class="inputText" id="xlInput" type="text" value ="{{ inputText }}" />
+	    </div>
+  {{/if}}
+
+  {{#if form}} <!-- form -->
+    {{#if text}}
+      <br />
+    {{/if}}
+      <form>
+      <div class="popup-content">
+
+      <table class="table table-bordered">
+      {{#each inputs}}
+
+        {{#ifeq type "option" }}
+        <tr>
+          <!-- select box get choices from "values" attribute -->
+          <td>{{ text }}</td><td><select name="{{ name }}" activity="{{ activity }}"
+            class="" style="width: 100%; font-size: 18px" >
+            <!-- 'options_selected' helper found in utils.js -->
+            {{{options_selected values selected localized}}}
+          </select></td>
+        </tr>
+
+        {{else}}
+          {{#ifeq type "toggle" }}
+        <tr>
+          <!-- select box get choices from "values" attribute -->
+          <td>{{{text}}}</td>
+          <td>
+          {{#each values}}        
+            <a name="btn-{{{name}}}" activity="{{ activity }}" class="btn btn-small btn-toggle
+           {{#ifeq value 'active'}}
+             btn-primary active
+           {{/ifeq}}        
+           {{#ifeq value 'disabled'}}
+             disabled
+           {{/ifeq}}        
+            "
+             style="width: 100px; margin: 2px 0px">{{{label}}}
+             
+               <input type="hidden" name="categories[{{{name}}}]" value="{{{value}}}" />
+             </a>
+          {{/each}} <!-- values -->
+          </td>
+        </tr>
+
+          {{else}} <!-- not type toggle --> <!-- radio or checkbox -->
+
+        <tr>
+          <!-- standard input field, if checkbox use value to set "checked" -->
+          <td>{{ text }}</td><td><input type="{{{ type }}}" id="{{{ name }}}" 
+            {{#ifeq type "radio"}}
+              name="{{{ groupname }}}" value="{{{ name }}}"
+            {{else}}
+              name="{{{ name }}}" value="{{{ value }}}"
+            {{/ifeq}}
+          
+            {{#ifeq value "true"}}
+            checked
+            {{/ifeq}}        
+          />
+
+          {{#ifeq type "checkbox"}}
+            <label for="{{{ name }}}"></label>
+          {{/ifeq}}        
+          {{#ifeq type "radio"}}
+            <label for="{{{ name }}"></label>
+          {{/ifeq}}        
+          </td>
+        </tr>
+          {{/ifeq}} <!-- type "toggle" -->
+        {{/ifeq}} <!-- type "option" -->
+
+      {{/each}}  <!-- inputs -->
+        </table>
+      </div> <!-- popup-content -->
+
+      </form>
+  {{/if}} <!-- form -->
+    </div> <!-- modal-body -->
+
+
+  {{#if footer}}
+    <div class="modal-footer">
+
+    {{#each buttons}}
+	    <a href="" class="btn {{ type }}" activity="{{ activity }}">{{{ label }}}</a>
+    {{/each}}
+
+    {{#if form}}
+  <!--	  <a href="#" class="btn btn-info    btn-defaults" activity="gui:settings:defaults">Defaults</a>
+	    <a href="#" class="btn btn-warning btn-cancel" activity="gui:settings:cancel">Cancel</a>
+	    <a href="#" class="btn btn-primary btn-submit" activity="gui:settings:submit gui:languages:changeNotification app:game:updateStrings">Apply</a>
+  -->
+    {{/if}}  <!-- form -->
+
+    </div> <!-- modal-footer -->
+  {{/if}} <!-- footer -->
+
+{{/if}} <!-- hint -->
+
+</div> <!-- popup-container -->
+
